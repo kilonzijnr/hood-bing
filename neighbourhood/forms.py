@@ -23,7 +23,21 @@ class ReqistrationForm(UserCreationForm):
             'confirm_password':forms.PasswordInput(attrs = {'class':'form-control names', 'placeholder':"Confirm Password", 'label': 'Confirm Password'}),
         }
 
+class PostForm(forms.ModelForm):
+    """A form for uploading posts"""
 
+    class Meta:
+        model = Post
+        fields = ('title', 'details')
+
+        widgets = {
+            'title': forms.TextInput(attrs={'class':"form-control post", 'label': ' Post Title', 'placeholder':"Input Title...", 'aria-label':"Title"}),
+            'details' : forms.Textarea(attrs={'class':"form-control post", 'label': 'Posts Details', 'placeholder':"Input Details...", 'aria-label':"Details"}),
+        }
+
+
+
+        
 
 
 
