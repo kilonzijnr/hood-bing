@@ -47,6 +47,21 @@ class PostForm(forms.ModelForm):
             'details' : forms.Textarea(attrs={'class':"form-control post", 'label': 'Posts Details', 'placeholder':"Input Details...", 'aria-label':"Details"}),
         }
 
+class BusinessForm(forms.ModelForm):
+    """A Form for inputing Neigbourhood Businesses"""
+
+    class Meta:
+        model = Business
+        fields = ('bs_name','about','bs_email','neighbourhood','bs_logo')
+        
+        widgets = {
+            'bs_name': forms.TextInput(attrs={'class':"form-control hood", 'label': 'Business Name', 'placeholder':"Input Business Name", 'aria-label':"Business Name"}),
+            'bs_email': forms.TextInput(attrs={'class':"form-control hood", 'label': 'Business Email / Contact', 'placeholder':"Input Business Contact ", 'aria-label':"Business Contact"}),
+            'about': forms.Textarea(attrs={'class':"form-control hood", 'label': 'Business Description', 'placeholder':"Input Business Description", 'aria-label':"Business About"}),
+            'neighbourhood': forms.Select(attrs={'class':"form-control hood", 'label': 'Business Neighborhood', 'placeholder':"Input Business Neighborhood", 'aria-label':"Business Neighborhood"}),
+            'bs_logo': forms.FileInput(attrs = {'class': 'form-control hood', 'type': 'file', 'label': 'Business Logo', 'placeholder':" Choose Business Logo", 'aria-label':"Business Logo"}),
+        }
+        
 
 
         
