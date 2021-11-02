@@ -4,7 +4,6 @@ from django.forms import widgets
 from .models import Profile, Business, Post
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from django.forms.widgets import Widget
 
 #Create your forms here
 
