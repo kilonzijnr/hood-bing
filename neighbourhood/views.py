@@ -69,3 +69,32 @@ def homepage(request):
 
     return render(request, 'homepage.html',{'upload_form':upload_form, 'manyposts':manyposts, 'manybusinesses':manybusinesses, 'posts':posts, 'businesses':businesses, 'jiji':jiji})
 
+
+@login_required
+def profile(request):
+    """Function for displaying  User Profile Details"""
+
+    user = request.user
+
+    profile = Profile.objects.get(user = request.user)
+    posts = Post.objects.filter(posted_by = profile).all()
+    businesses = Business.objects.filter(owner = user).all()
+
+    title = f'{request.user.username}\'s Profile'
+
+    profileupdate = ProfileUpdateForm()
+    businessupdate = BusinessForm()
+
+    if request.method == 'POST':
+        businessupdate = BusinessForm(request.POST, request.FILES)
+        if businessupdate.is_valid():
+            business = businessupdate.save(commit=False)
+            business.manager = user
+            business.save()
+            return redirect('profile')
+        else:
+            businessupdate = BusinessForm()
+
+    return render(request, 'profile.html', {'title':title, 'profile':profile, 'posts':posts, 'profileupdate':profileupdate, 'businessupdate':businessupdate, 'businesses':businesses})
+
+
