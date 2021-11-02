@@ -4,8 +4,9 @@ from django.contrib.auth.models import User
 from .forms import  PostForm, RegistrationForm, BusinessForm ,ProfileUpdateForm
 from .models import Post, Profile,Neighbourhood, Business
 from django.contrib.auth.decorators import login_required
-from django.http.response import Http404
+from django.http.response import Http404, HttpResponseRedirect
 from django.contrib import messages
+from django.urls.base import reverse
 
 # Create your views here.
 
@@ -35,6 +36,36 @@ def userlogin(request):
 
         if user is not None:
             login(request,user)
-            return redirect('home')
+            return redirect('homepage')
 
     return render(request, 'login.html')
+
+@login_required('')
+def homepage(request):
+
+    user = request.user
+
+    posts = Post.objects.all()
+    businesses = Business.objects.filter(neighbourhood= user.profile.neighborhood).all()
+    jiji = Neighbourhood.objects.all()
+    
+    manyposts = Post.objects.last()
+    manybusinesses = Business.objects.last()
+
+    upload_form = PostForm()
+
+    if request.method == 'POST':
+        upload_form = PostForm(request.POST)
+        if upload_form.is_valid():
+            profile = Profile.objects.filter(user = user).first()
+            ghetto = profile.neighbourhood
+            new_post = upload_form.save(commit= False)
+            new_post.jiji = ghetto
+            new_post.posted_by = Profile.objects.get(user = request.user)
+            new_post.save()
+            return HttpResponseRedirect(reverse('homepage'))
+        else:
+            upload_form = PostForm()
+
+    return render(request, 'homepage.html',{'upload_form':upload_form, 'manyposts':manyposts, 'manybusinesses':manybusinesses, 'posts':posts, 'businesses':businesses, 'jiji':jiji})
+
