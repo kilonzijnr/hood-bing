@@ -1,9 +1,11 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .forms import  PostForm, RegistrationForm, BusinessForm ,ProfileUpdateForm
 from .models import Post, Profile,Neighbourhood, Business
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http.response import Http404, HttpResponseRedirect
 from django.contrib import messages
 from django.urls.base import reverse
@@ -97,4 +99,10 @@ def profile(request):
 
     return render(request, 'profile.html', {'title':title, 'profile':profile, 'posts':posts, 'profileupdate':profileupdate, 'businessupdate':businessupdate, 'businesses':businesses})
 
-
+class UpdateBusiness(LoginRequiredMixin, UpdateView):
+    """A class for updating bussiness profile"""
+    
+    model = Business
+    form_class = Business
+    template_name = 'business_update.html'
+    context_object_name = 'business'
