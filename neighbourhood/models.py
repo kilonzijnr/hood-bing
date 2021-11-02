@@ -83,6 +83,7 @@ class Business(models.Model):
     bs_email = EmailField()
     manager = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     about = models.TextField(null= True)
+    bs_logo = CloudinaryField('image',default = '')
 
     def __str__(self) ->str:
         return self.bs_name
