@@ -103,7 +103,25 @@ class Business(models.Model):
     @classmethod
     def search_by_name(cls, search_term):
         """Method for getting business profile through search functionality"""
-        
+
         business = cls.objects.filter(bs_name__icontains =search_term)
         return business
 
+class Post(models.Model):
+    """Model for Post Uploads"""
+
+    title = models.CharField(max_length= 70)
+    details = models.TextField()
+    jiji = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE, null=True, blank=True)
+    publishing_date = models.DateTimeField(auto_now_add=True)
+    posted_by = models.ForeignKey(Profile, null=True, on_delete=models.CASCADE)
+
+    def __str__(self) -> str:
+        return self.title
+
+    def save_post(self):
+        self.save()
+
+    def delete_post(self):
+        self.delete()
+        
