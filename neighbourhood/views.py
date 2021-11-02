@@ -128,3 +128,8 @@ def search_results(request):
     else:
         message = "Enter a valid business input"
         return render(request, 'search.html',{"message": message}) 
+
+def logout_view(request):
+    """A function for signing out of user profile"terminating current session"""
+    logout(request)
+    return redirect('login')
