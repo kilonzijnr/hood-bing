@@ -100,9 +100,31 @@ def profile(request):
     return render(request, 'profile.html', {'title':title, 'profile':profile, 'posts':posts, 'profileupdate':profileupdate, 'businessupdate':businessupdate, 'businesses':businesses})
 
 class UpdateBusiness(LoginRequiredMixin, UpdateView):
-    """A class for updating bussiness profile"""
-    
+    """A class view for updating bussiness profile"""
+
     model = Business
     form_class = Business
     template_name = 'business_update.html'
     context_object_name = 'business'
+
+class UpdateUserProfile(LoginRequiredMixin,UpdateView):
+    """A class view for updating user profile"""
+
+    model = Profile
+    form_class = 'ProfileUpdateForm'
+    template_name = 'profile_update.html'
+    context_object_name = 'profile'
+
+@login_required
+def search_results(request):
+    """Function for searching for business profile"""
+
+    if 'search_business' in request.GET and request.GET["search_business"]:
+        search_term = request.GET.get("search_business")
+        searched_business = Business.search_by_name(search_term)
+        message = f"{search_term}"
+        title = search_term
+        return render(request, 'search.html',{"message": message, "Enter Valid Business Input": searched_business, 'title': title})
+    else:
+        message = "Enter a valid business input"
+        return render(request, 'search.html',{"message": message}) 
