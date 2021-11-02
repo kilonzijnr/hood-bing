@@ -35,5 +35,6 @@ class Neighbourhood(models.Model):
 
     @classmethod
     def find_neighbourhood(cls, search_term):
+        """Method for finding a neighbourhood by searching"""
         jiji = cls.objects.filter(name__icontains = search_term)
         return jiji
