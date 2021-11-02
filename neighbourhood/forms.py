@@ -23,6 +23,18 @@ class ReqistrationForm(UserCreationForm):
             'confirm_password':forms.PasswordInput(attrs = {'class':'form-control names', 'placeholder':"Confirm Password", 'label': 'Confirm Password'}),
         }
 
+class ProfileUpdateForm(forms.ModelForm):
+    """A Form for User Profile Update"""
+
+    class Meta:
+        model = Profile
+        fields = ('neighbourhood', 'profile_photo')
+
+        widgets = {
+            'neighborhood': forms.Select(attrs={'class':"form-control profile", 'label': 'Neighborhood', 'placeholder':"Input Your Neighborhood", 'aria-label':"Neighborhood"}),
+            'profile_photo': forms.FileInput(attrs = {'class': 'form-control photo', 'type': 'file'}),
+        }
+        
 class PostForm(forms.ModelForm):
     """A form for uploading posts"""
 
