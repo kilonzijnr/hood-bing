@@ -73,3 +73,37 @@ class Profile(models.Model):
 
         users = cls.objects.filter(user__username__icontains = search_term)
         return users
+
+
+class Business(models.Model):
+    """Model for Business Profile"""
+
+    bs_name = models.CharField(max_length= 70)
+    neighbourhood = models.ForeignKey(Neighbourhood, null= True, on_delete= models.DO_NOTHING)
+    bs_email = EmailField()
+    manager = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    about = models.TextField(null= True)
+
+    def __str__(self) ->str:
+        return self.bs_name
+
+    def save_business(self):
+        self.save()
+
+    def delete_business(self):
+        self.delete()
+
+    @classmethod
+    def update_business(cls, business_id, new_business):
+        """Method for updating business profile"""
+
+        business = cls.objects.filter(id = business_id).update(name = new_business)
+        return business
+
+    @classmethod
+    def search_by_name(cls, search_term):
+        """Method for getting business profile through search functionality"""
+        
+        business = cls.objects.filter(bs_name__icontains =search_term)
+        return business
+
