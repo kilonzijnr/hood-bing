@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block content %}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://v5.getbootstrap.com/docs/5.0/examples/blog/">
+    <title>NEIGBOURHOOD</title>
+</head>
+<style>
+    .card{
+        background-color: #ffff;
+		margin: 0 auto;
+		box-shadow: rgb(0, 0, 0) 0px 7px 29px 0px;
+		border-radius: 10px;
+		color: white;
+        text-align: center;
+        max-width: 1000px;
+    }
+    .card-link{
+    outline: none;
+    border: none;
+    margin: 1rem 0;
+    padding: .5rem 1rem;
+    width: 150px;
+    border-radius: 8px;
+    background-color: #00061c;
+    color: #fff;
+    font-weight: 600;
+    }
+</style>
+<body>
+    <div class="card" style="width: 18rem;">
+        {% if profile.photo %}
+		<img src="{{ user.profile.profile_photo.url }}" alt="" class="card-img-top"
+			style="width: 200px; height: 200px; border-radius: 50%" />
+		{%else%}
+		<img src="https://st2.depositphotos.com/1104517/11965/v/600/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg"
+			class="card-img-top" alt="My profile picture" />
+		{% endif %}
+        <div class="card-body">
+          <h5 class="card-title">HELLO {{ request.user.username}},Welcome to neighbourhood post</h5>
+          <p class="card-text"></p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><b>YOU CAN ADDPOSTS</b></li>
+          <li class="list-group-item"><b>YOU CAN VIEW POSTS</b></li>
+          <li class="list-group-item"><b>YOU CAN VIEW BASIC SERVICES</b></li>
+        </ul>
+        <div class="card-body">
+          <a href="profile" class="card-link">VIEW PROFILE</a>
+          <br><br>
+          <a href="#" class="card-link">CREATE A POST</a>
+          <br><br>
+          <a href="#" class="card-link">UPDATE PROFILE</a>
+          <br><br>
+          <a href="#" class="card-link">REGISTER BUSINESS</a>
+        </div>
+      </div>
+
+        </div>
+      </form>
+    </div>
+</div>
+</div>
+</div>
+
+</body>
+</html>
+
+{% endblock content %}
+
+{% block scripts %}
+{{ block.super }}
+
+{% endblock scripts %}

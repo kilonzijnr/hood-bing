@@ -31,9 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django-heroku',
+    'django_heroku',
     'psycopg2',
-    'cloudinary',
     'django_bootstrap5',
     'neighbourhood',
     'django.contrib.admin',

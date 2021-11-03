@@ -2,7 +2,7 @@ from os import name
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.fields import EmailField
-from cloudinary.models import CloudinaryField
+# from cloudinary.models import CloudinaryField
 
 # Create your models here.
 
@@ -44,11 +44,10 @@ class Neighbourhood(models.Model):
 
 class Profile(models.Model):
     """Model for User Profile"""
-
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     neighbourhood = models.ForeignKey(Neighbourhood, null =  True, blank=True, on_delete=models.DO_NOTHING, related_name = 'jiji')
     email = EmailField()
-    profile_photo = CloudinaryField('image', blank = True, default = '')
+    profile_photo = models.ImageField(upload_to='images/')
     date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) -> str:
@@ -83,7 +82,7 @@ class Business(models.Model):
     bs_email = EmailField()
     manager = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     about = models.TextField(null= True)
-    bs_logo = CloudinaryField('image',default = '')
+    bs_logo =  models.ImageField(upload_to='images/')
 
     def __str__(self) ->str:
         return self.bs_name

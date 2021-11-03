@@ -10,6 +10,7 @@ django = "*"
 cloudinary = "*"
 djangorestframework = "*"
 django-heroku = "*"
+pillow = "*"
 
 [dev-packages]
 

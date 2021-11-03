@@ -1,12 +1,12 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import UpdateView
 from .forms import  PostForm, RegistrationForm, BusinessForm ,ProfileUpdateForm
 from .models import Post, Profile,Neighbourhood, Business
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http.response import Http404, HttpResponseRedirect
+from django.http.response import HttpResponseRedirect
 from django.contrib import messages
 from django.urls.base import reverse
 
@@ -48,7 +48,6 @@ def homepage(request):
     user = request.user
 
     posts = Post.objects.all()
-    businesses = Business.objects.filter(neighbourhood= user.profile.neighborhood).all()
     jiji = Neighbourhood.objects.all()
     
     manyposts = Post.objects.last()
@@ -69,7 +68,7 @@ def homepage(request):
         else:
             upload_form = PostForm()
 
-    return render(request, 'homepage.html',{'upload_form':upload_form, 'manyposts':manyposts, 'manybusinesses':manybusinesses, 'posts':posts, 'businesses':businesses, 'jiji':jiji})
+    return render(request, 'homepage.html',{'upload_form':upload_form, 'manyposts':manyposts, 'manybusinesses':manybusinesses, 'posts':posts,})
 
 
 @login_required
@@ -78,7 +77,6 @@ def profile(request):
 
     user = request.user
 
-    profile = Profile.objects.get(user = request.user)
     posts = Post.objects.filter(posted_by = profile).all()
     businesses = Business.objects.filter(owner = user).all()
 

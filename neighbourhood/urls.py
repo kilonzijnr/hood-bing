@@ -9,8 +9,8 @@ from .views import UpdateBusiness, homepage, signup, userlogin, homepage, user_l
 urlpatterns = [
     path('signup/', signup, name = 'signup'),  
     path('', userlogin, name = 'userlogin' ),
-    path('home', homepage, name = 'homepage'),
     path('profile', profile, name = 'profile'),
+    path('homepage', homepage, name = 'homepage'),
     path('profile/update/<int:pk>', UpdateUserProfile.as_view(), name = 'UpdateUserProfile'),
     path('business/update/<int:pk>', UpdateBusiness.as_view(), name = 'updatebusiness'),
     path('search/', search_results, name = 'search_business'),

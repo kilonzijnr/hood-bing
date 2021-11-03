@@ -30,7 +30,7 @@ class ProfileUpdateForm(forms.ModelForm):
         fields = ('neighbourhood', 'profile_photo')
 
         widgets = {
-            'neighborhood': forms.Select(attrs={'class':"form-control profile", 'label': 'Neighborhood', 'placeholder':"Input Your Neighborhood", 'aria-label':"Neighborhood"}),
+            'neighbourhood': forms.Select(attrs={'class':"form-control profile", 'label': 'Neighbourhood', 'placeholder':"Input Your Neighbourhood", 'aria-label':"Neighborhood"}),
             'profile_photo': forms.FileInput(attrs = {'class': 'form-control photo', 'type': 'file'}),
         }
         
