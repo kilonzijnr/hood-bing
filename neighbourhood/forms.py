@@ -27,11 +27,12 @@ class ProfileUpdateForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        fields = ('neighbourhood', 'profile_photo')
+        fields = ('neighbourhood', 'profile_photo','email')
 
         widgets = {
             'neighbourhood': forms.Select(attrs={'class':"form-control profile", 'label': 'Neighbourhood', 'placeholder':"Input Your Neighbourhood", 'aria-label':"Neighborhood"}),
             'profile_photo': forms.FileInput(attrs = {'class': 'form-control photo', 'type': 'file'}),
+            'email': forms.TextInput(attrs={'class':"form-control profile", 'label': 'Contact Details', 'placeholder':"Contact Details", 'aria-label':"Contact Details"}),
         }
         
 class PostForm(forms.ModelForm):
