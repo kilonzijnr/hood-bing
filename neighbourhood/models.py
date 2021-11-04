@@ -2,6 +2,7 @@ from os import name
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.fields import EmailField
+from django.urls import reverse
 # from cloudinary.models import CloudinaryField
 
 # Create your models here.
@@ -44,11 +45,14 @@ class Neighbourhood(models.Model):
 
 class Profile(models.Model):
     """Model for User Profile"""
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, default = 'user')
     neighbourhood = models.ForeignKey(Neighbourhood, null =  True, blank=True, on_delete=models.DO_NOTHING, related_name = 'jiji')
     email = EmailField()
     profile_photo = models.ImageField(upload_to='images/')
     date_created = models.DateTimeField(auto_now_add=True)
+
+    def get_absolute_url(self):
+        return reverse('profile')
 
     def __str__(self) -> str:
         return self.user.username

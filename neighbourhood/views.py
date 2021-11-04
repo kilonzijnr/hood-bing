@@ -19,7 +19,7 @@ def signup(request):
 
     if request.method == 'POST':
         register = RegistrationForm(request.POST)
-        if register.is_validd():
+        if register.is_valid():
             register.save()
             user = register.cleaned_data.get('username')
             messages.success(request, user + 'You have succesfully created your account')
@@ -130,4 +130,4 @@ def search_results(request):
 def user_logout(request):
     """A function for signing out of user profile"terminating current session"""
     logout(request)
-    return redirect('login')
+    return redirect('userlogin')

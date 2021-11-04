@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Sing Up</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="d-flex justify-content-space-between align-items-center">
+
+                <div class="login-card px-4 py-2">
+                    <h4 class="fw-light text--center mb-4">NEIGHBOURHOOD BING</span></h4>
+                    <p class="fw-light">CREATE ACCOUNT</p>
+                    <form class="d-flex flex-column justify-content-center align-items-center" action="" method="post">
+                        {% csrf_token %}
+                        <div class="mb-2">
+                            <div class="fw-bold text-capitalize mb-2">
+                                <label for="floatingInput">Username</label>
+                            </div>
+                            <div>
+                                {{ register.username }}
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <div class="fw-bold text-capitalize mb-2">
+                                <label for="floatingInput">Email Address</label>
+                            </div>
+                            <div>
+                                {{ register.email }}
+                            </div>
+                        </div>
+                        <div class="mt-2">
+                            <div class="fw-bold text-capitalize mb-2">
+                                <label for="floatingInput">Password</label>
+                            </div>
+                            <div>
+                                {{ register.password }}
+                            </div>
+                        </div>
+                        <div class="mt-2">
+                            <div class="fw-bold text-capitalize mb-2">
+                                <label for="floatingInput">Confirm Password</label>
+                            </div>
+                            <div>
+                                {{ register.password2 }}
+                            </div>
+                        </div>
+                        <div>
+                            <button class="signup-ghost-button" type="submit">Create Account</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

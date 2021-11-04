@@ -20,13 +20,13 @@
 </head>
 <style>
     .card{
-        background-color: #ffff;
+    background-color: #ffff;
 		margin: 0 auto;
 		box-shadow: rgb(0, 0, 0) 0px 7px 29px 0px;
-		border-radius: 10px;
+		border-radius: 30px;
 		color: white;
-        text-align: center;
-        max-width: 1000px;
+    text-align: center;
+    
     }
     .card-link{
     outline: none;
@@ -46,7 +46,7 @@
 		<img src="{{ user.profile.profile_photo.url }}" alt="" class="card-img-top"
 			style="width: 200px; height: 200px; border-radius: 50%" />
 		{%else%}
-		<img src="https://st2.depositphotos.com/1104517/11965/v/600/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg"
+		<img src="https://cdn-icons.flaticon.com/png/512/2194/premium/2194188.png?token=exp=1635938659~hmac=c680d5dcb16fe6bb82943d63e4e3b3e7"
 			class="card-img-top" alt="My profile picture" />
 		{% endif %}
         <div class="card-body">
@@ -54,21 +54,22 @@
           <p class="card-text"></p>
         </div>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item"><b>YOU CAN ADDPOSTS</b></li>
+          <li class="list-group-item"><b>YOU CAN ADD POSTS</b></li>
           <li class="list-group-item"><b>YOU CAN VIEW POSTS</b></li>
           <li class="list-group-item"><b>YOU CAN VIEW BASIC SERVICES</b></li>
         </ul>
         <div class="card-body">
-          <a href="profile" class="card-link">VIEW PROFILE</a>
+          <a href="{% url 'profile' %}" class="card-link">VIEW PROFILE</a>
           <br><br>
           <a href="#" class="card-link">CREATE A POST</a>
           <br><br>
-          <a href="UpdateUserProfile" class="card-link">UPDATE PROFILE</a>
+          <a href="{% url 'UpdateUserProfile' request.user.profile.pk %}" class="card-link">UPDATE PROFILE</a>
           <br><br>
           <a href="#" class="card-link">REGISTER BUSINESS</a>
+          <br><br>
+          <a href="{% url 'user_logout' %}" class="card-link">SIGN OUT</a>
         </div>
       </div>
-
         </div>
       </form>
     </div>
