@@ -4,6 +4,8 @@ from django.forms import widgets
 from .models import Profile, Business, Post
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login, logout, authenticate
+from django.http import HttpResponseRedirect
 
 #Create your forms here
 
@@ -11,11 +13,9 @@ class RegistrationForm(UserCreationForm):
     """A Form for user registration"""
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'email','username', 'password', 'password2']
+        fields = ['email','username', 'password', 'password2']
 
         widgets = {
-            'first_name':forms.TextInput(attrs = {'class':'form-control names', 'placeholder':"First Name", 'label': 'First Name'}),
-            'last_name':forms.TextInput(attrs = {'class':'form-control names', 'placeholder':"Second Name", 'label': 'Sur Name'}),
             'email':forms.TextInput(attrs = {'class':'form-control names', 'placeholder':"Email Address", 'label': 'Email Address'}),
             'username':forms.TextInput(attrs = {'class':'form-control names', 'placeholder':"Username", 'label': 'Username'}),
             'password':forms.PasswordInput(attrs = {'class':'form-control names','type':'password', 'placeholder':"Password", 'label': 'Password'}),

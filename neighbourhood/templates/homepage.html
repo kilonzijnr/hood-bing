@@ -46,7 +46,7 @@
 		<img src="{{ user.profile.profile_photo.url }}" alt="" class="card-img-top"
 			style="width: 200px; height: 200px; border-radius: 50%" />
 		{%else%}
-		<img src="https://cdn-icons.flaticon.com/png/512/2194/premium/2194188.png?token=exp=1635938659~hmac=c680d5dcb16fe6bb82943d63e4e3b3e7"
+		<img src="https://cdn-icons-png.flaticon.com/128/5977/5977791.png"
 			class="card-img-top" alt="My profile picture" />
 		{% endif %}
         <div class="card-body">
@@ -59,15 +59,15 @@
           <li class="list-group-item"><b>YOU CAN VIEW BASIC SERVICES</b></li>
         </ul>
         <div class="card-body">
-          <a href="{% url 'profile' %}" class="card-link">VIEW PROFILE</a>
+          <a href="" class="card-link">VIEW PROFILE</a>
           <br><br>
           <a href="#" class="card-link">CREATE A POST</a>
           <br><br>
-          <a href="{% url 'UpdateUserProfile' request.user.profile.pk %}" class="card-link">UPDATE PROFILE</a>
+          <a href="" class="card-link">UPDATE PROFILE</a>
           <br><br>
           <a href="#" class="card-link">REGISTER BUSINESS</a>
           <br><br>
-          <a href="{% url 'user_logout' %}" class="card-link">SIGN OUT</a>
+          <a href="{% url 'logout' %}" class="card-link">SIGN OUT</a>
         </div>
       </div>
         </div>

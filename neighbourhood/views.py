@@ -9,40 +9,55 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http.response import HttpResponseRedirect
 from django.contrib import messages
 from django.urls.base import reverse
-
+from django.contrib.auth.forms import UserCreationForm
 # Create your views here.
 
-def signup(request):
-    """A function for Initialising user registrationn form"""
-
-    register = RegistrationForm()
-
+def user_login(request):
+    message = 'Login to Proceed'
     if request.method == 'POST':
-        register = RegistrationForm(request.POST)
-        if register.is_valid():
-            register.save()
-            user = register.cleaned_data.get('username')
-            messages.success(request, user + 'You have succesfully created your account')
-            return redirect('login')
-
-    return render(request, 'signup.html', {'register':register})
-
-def userlogin(request):
-    """A function for initialising User Login Form"""
-
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-
-        user = authenticate(request, username = username, password=password)
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
 
         if user is not None:
-            login(request,user)
+            login(request, user)
+            messages.success(request,f"Welcome {username} to Movie Gallore!")
             return redirect('homepage')
 
-    return render(request, 'login.html')
+        else:
+            messages.success(request,"Oops Somethinge went wrong, please Login!")
 
-@login_required('')
+            return render(request, 'authentication/login.html')
+    else:
+        return render(request, 'registration/login.html', {"message": message})
+
+    
+def user_logout(request):
+
+    logout(request)
+    messages.success(request, ("You have logged out"))
+    return redirect('homepage')
+
+def user_signup(request):
+    message='Create an account here!'
+    if request.method=='POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password1']
+            user= authenticate(username=username, password=password)
+            login(request, user)
+            messages.success(request,("Account created successfully"))
+
+            return redirect('homepage')
+            
+    else:
+        form=UserCreationForm()
+    return render(request, 'registration/signup.html', {"message": message,"form": form})
+# --------------------------------------------------------
+
+
 def homepage(request):
 
     user = request.user
@@ -71,7 +86,7 @@ def homepage(request):
     return render(request, 'homepage.html',{'upload_form':upload_form, 'manyposts':manyposts, 'manybusinesses':manybusinesses, 'posts':posts,})
 
 
-@login_required
+@login_required('')
 def profile(request):
     """Function for displaying  User Profile Details"""
 
@@ -113,7 +128,7 @@ class UpdateUserProfile(LoginRequiredMixin,UpdateView):
     template_name = 'profile_update.html'
     context_object_name = 'profile'
 
-@login_required
+@login_required('')
 def search_results(request):
     """Function for searching for business profile"""
 
@@ -127,7 +142,7 @@ def search_results(request):
         message = "Enter a valid business input"
         return render(request, 'search.html',{"message": message}) 
 
-def user_logout(request):
-    """A function for signing out of user profile"terminating current session"""
-    logout(request)
-    return redirect('userlogin')
+# def user_logout(request):
+#     """A function for signing out of user profile"terminating current session"""
+#     logout(request)
+#     return redirect('userlogin')
