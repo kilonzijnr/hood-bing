@@ -27,7 +27,7 @@ def user_login(request):
         else:
             messages.success(request,"Oops Somethinge went wrong, please Login!")
 
-            return render(request, 'authentication/login.html')
+            return render(request, 'registration/login.html')
     else:
         return render(request, 'registration/login.html', {"message": message})
 
@@ -36,7 +36,7 @@ def user_logout(request):
 
     logout(request)
     messages.success(request, ("You have logged out"))
-    return redirect('homepage')
+    return redirect('login')
 
 def user_signup(request):
     message='Create an account here!'
@@ -86,7 +86,7 @@ def homepage(request):
     return render(request, 'homepage.html',{'upload_form':upload_form, 'manyposts':manyposts, 'manybusinesses':manybusinesses, 'posts':posts,})
 
 
-@login_required('')
+
 def profile(request):
     """Function for displaying  User Profile Details"""
 
@@ -106,11 +106,11 @@ def profile(request):
             business = businessupdate.save(commit=False)
             business.manager = user
             business.save()
-            return redirect('profile')
+            return redirect('profile_UPDATE')
         else:
             businessupdate = BusinessForm()
 
-    return render(request, 'profile.html', {'title':title, 'profile':profile, 'posts':posts, 'profileupdate':profileupdate, 'businessupdate':businessupdate, 'businesses':businesses})
+    return render(request, 'profile_update.html', {'title':title, 'profile':profile, 'posts':posts, 'profileupdate':profileupdate, 'businessupdate':businessupdate, 'businesses':businesses})
 
 class UpdateBusiness(LoginRequiredMixin, UpdateView):
     """A class view for updating bussiness profile"""
@@ -128,7 +128,7 @@ class UpdateUserProfile(LoginRequiredMixin,UpdateView):
     template_name = 'profile_update.html'
     context_object_name = 'profile'
 
-@login_required('')
+
 def search_results(request):
     """Function for searching for business profile"""
 

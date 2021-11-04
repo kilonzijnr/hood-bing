@@ -8,9 +8,9 @@ from .views import *
 from . import views
 
 urlpatterns = [
-    path('login/', views.user_login, name='login'),
+    path('', views.user_login, name='login'),
     path('logout/', views.user_logout, name='logout'),
-    path('', views.user_signup, name= 'signup'),
+    path('signup/', views.user_signup, name= 'signup'),
     path('profile', profile, name = 'profile'),
     path('homepage', homepage, name = 'homepage'),
     path('profile/update/<int:pk>', UpdateUserProfile.as_view(), name = 'UpdateUserProfile'),
